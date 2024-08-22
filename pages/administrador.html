@@ -92,7 +92,13 @@
     <section class="mt-4">
       <div class="d-flex justify-content-between">
         <h2>Tabla de Contactos</h2>
-        <button class="btn btn-primary">Nuevo</button>
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#modalAdminContacto"
+        >
+          Nuevo
+        </button>
       </div>
       <div class="table-reponsive">
         <table class="table table-striped">
@@ -144,6 +150,63 @@
       </div>
     </section>
   </main>
+  <!-- Modal para administrar contactos-->
+  <div
+    class="modal fade"
+    id="modalAdminContacto"
+    tabindex="-1"
+    aria-labelledby="modalAdminContactoLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="modalAdminContactoLabel">
+            Administrar Contactos
+          </h2>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="apellido" />
+            </div>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" />
+            </div>
+            <div class="mb-3">
+              <label for="mail" class="form-label">Mail</label>
+              <input type="text" class="form-control" id="mail" />
+            </div>
+            <div class="mb-3">
+              <label for="domicilio" class="form-label">Domicilio</label>
+              <input type="text" class="form-control" id="domicilio" />
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="telefono" />
+            </div>
+            <div class="mb-3">
+              <label for="github" class="form-label">GitHub</label>
+              <input type="text" class="form-control" id="github" />
+            </div>
+            <div class="mb-3">
+              <label for="foto" class="form-label">Foto</label>
+              <input type="text" class="form-control" id="foto" />
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <footer></footer>
   <body>
     <script
