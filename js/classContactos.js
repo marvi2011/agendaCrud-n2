@@ -1,7 +1,7 @@
 //aqui voy a crear las clases
 export class Contacto {
   //antes de export se coloca en el archivo html que voy a usar, en el script type=module, luego en el archivo que voy a usar el archivo que tiene export se coloca import arriba de todo el codigo
- //si uso export default se puede exportar una sola cosa... y en donde va import se sacan las llavecitas
+  //si uso export default se puede exportar una sola cosa... y en donde va import se sacan las llavecitas
   #id;
   #apellido;
   #nombre;
@@ -11,7 +11,7 @@ export class Contacto {
   #git;
   #foto;
   constructor(apellido, nombre, mail, domicilio, telefono, git, foto) {
-    this.#id = crypto.randomUUID(); //genera un identificador unico 
+    this.#id = crypto.randomUUID(); //genera un identificador unico
     this.#apellido = apellido;
     this.#nombre = nombre;
     this.#mail = mail;
@@ -32,6 +32,12 @@ export class Contacto {
   }
   set apellido(value) {
     this.#apellido = value;
+  }
+  get nombre() {
+    return this.#nombre;
+  }
+  set nombre(value) {
+    this.nombre = value;
   }
   get mail() {
     return this.#mail;
@@ -56,5 +62,11 @@ export class Contacto {
   }
   set domicilio(value) {
     this.#domicilio = value;
+  }
+  get foto() {
+    return this.#foto;
+  }
+  set foto(value) {
+    this.#foto = value;
   }
 }
