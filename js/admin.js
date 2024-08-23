@@ -55,13 +55,15 @@ const crearContacto = (e) => {
   );
   console.log(nuevoContacto); //con esto veo el nuevo contacto
   //quiero guardar el objeto en mi lista de contactos o array con push... ya hemos creado el array
-listaContactos.push(nuevoContacto);
-console.log(listaContactos);
-
+  listaContactos.push(nuevoContacto);
+  console.log(listaContactos);
+  limpiarFormulario()
+  //guardar los datos en localStorage
 };
 
-
-//guardar los datos en localStorage
+const limpiarFormulario = () => {
+  formularioContacto.reset();
+};
 
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
