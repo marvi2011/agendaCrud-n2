@@ -69,4 +69,18 @@ export class Contacto {
   set foto(value) {
     this.#foto = value;
   }
+
+  // metodo para que funcione el stringify de JSON
+  toJSON() {
+    return {
+      id: this.id,
+      apellido: this.apellido,
+      nombre: this.nombre,
+      mail: this.mail,
+      domicilio: this.domicilio,
+      telefono: this.telefono,
+      git: this.git,
+      foto: this.foto,
+    };
+  }
 }

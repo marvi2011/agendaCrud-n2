@@ -57,13 +57,17 @@ const crearContacto = (e) => {
   //quiero guardar el objeto en mi lista de contactos o array con push... ya hemos creado el array
   listaContactos.push(nuevoContacto);
   console.log(listaContactos);
-  limpiarFormulario()
+  limpiarFormulario();
   //guardar los datos en localStorage
+  guardarEnLocalstorage();
 };
 
 const limpiarFormulario = () => {
   formularioContacto.reset();
 };
+
+const guardarEnLocalstorage = () =>
+  localStorage.setItem("listaContactosKey", JSON.stringify(listaContactos)); //si tengo propiedades privadas tengo que hacer algo en donde tengo los get y set por que puede acceder a las propiedades privadas
 
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
