@@ -33,7 +33,8 @@ const git = document.getElementById("github");
 const foto = document.getElementById("foto");
 
 //vamos a verificar si hay datos en el localstorage, si hay los traigo y sino que sea un array vacio
-const listaContactos = JSON.parse(localStorage.getItem("listaContactosKey")) || []; //esto es la creacion del array, luego tengo que sumar el contacto al array con push
+const listaContactos =
+  JSON.parse(localStorage.getItem("listaContactosKey")) || []; //esto es la creacion del array, luego tengo que sumar el contacto al array con push
 
 //2- aqui van las funciones
 const mostrarModal = () => {
@@ -70,6 +71,30 @@ const limpiarFormulario = () => {
 const guardarEnLocalstorage = () =>
   localStorage.setItem("listaContactosKey", JSON.stringify(listaContactos)); //si tengo propiedades privadas tengo que hacer algo en donde tengo los get y set por que puede acceder a las propiedades privadas
 
+const cargaInicial = () => {
+  //preguntar si hay datoy en el array
+  if (listaContactos.length !== 0) {
+    //dibujar una tabla en la fila
+    listaContactos.map((contacto) => dibujarFila());
+  }
+};
+
+const dibujarFila = () => {
+  const tabla = document.querySelector("tbody");
+  tabla.innerHTML += `<tr>
+<td>1</td>
+<td>Lopez</td>
+<td>Camila</td>
+<td>camilaLopez@mail.com</td>
+<td>
+  <button class="btn btn-success">Ver</button>
+  <button class="btn btn-warning">Editar</button>
+  <button class="btn btn-danger">Borrar</button>
+</td>
+</tr>`;
+};
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
 formularioContacto.addEventListener("submit", crearContacto);
+
+cargaInicial();
