@@ -32,7 +32,8 @@ const telefono = document.getElementById("telefono");
 const git = document.getElementById("github");
 const foto = document.getElementById("foto");
 
-const listaContactos = []; //esto es la creacion del array, luego tengo que sumar el contacto al array con push
+//vamos a verificar si hay datos en el localstorage, si hay los traigo y sino que sea un array vacio
+const listaContactos = JSON.parse(localStorage.getItem("listaContactosKey")) || []; //esto es la creacion del array, luego tengo que sumar el contacto al array con push
 
 //2- aqui van las funciones
 const mostrarModal = () => {
