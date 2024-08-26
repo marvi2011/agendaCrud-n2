@@ -35,7 +35,7 @@ const foto = document.getElementById("foto");
 //vamos a verificar si hay datos en el localstorage, si hay los traigo y sino que sea un array vacio
 const listaContactos =
   JSON.parse(localStorage.getItem("listaContactosKey")) || []; //esto es la creacion del array, luego tengo que sumar el contacto al array con push
-
+const tabla = document.querySelector("tbody");
 //2- aqui van las funciones
 const mostrarModal = () => {
   modalContacto.show();
@@ -63,7 +63,7 @@ const crearContacto = (e) => {
   //guardar los datos en localStorage
   guardarEnLocalstorage();
   //ahora debo dibujar la fila al final de la tabla
-  dibujarFila(nuevoContacto)
+  dibujarFila(nuevoContacto);
 };
 
 const limpiarFormulario = () => {
@@ -82,7 +82,6 @@ const cargaInicial = () => {
 };
 
 const dibujarFila = (contacto) => {
-  const tabla = document.querySelector("tbody");
   tabla.innerHTML += `<tr>
 <td>${contacto.id}</td>
 <td>${contacto.apellido}</td>
@@ -91,11 +90,13 @@ const dibujarFila = (contacto) => {
 <td>
   <button class="btn btn-success">Ver</button>
   <button class="btn btn-warning">Editar</button>
-  <button class="btn btn-danger" onclick="borrarContacto()">Borrar</button>
+  <button class="btn btn-danger" onclick="borrarContacto('${contacto.id}')">Borrar</button>
 </td>
 </tr>`;
 };
-window.borrarContacto= ()=>{ //este metodo se usa para que funcione el onclick del boton borrar.
+window.borrarContacto = (id) => {
+  console.log(id);
+  //este metodo se usa para que funcione el onclick del boton borrar.
   Swal.fire({
     title: "¿Estás seguro que quieres borrar este contacto?.",
     text: "No puedes revertir el proceso luego de borrar.",
@@ -104,18 +105,33 @@ window.borrarContacto= ()=>{ //este metodo se usa para que funcione el onclick d
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Borrar",
-    cancelButtonText: "Cancelar"
+    cancelButtonText: "Cancelar",
   }).then((result) => {
+    //then es un tiempo de espera
+    console.log(result); // es para ver que tiene result, que ya viene en el codigo
     if (result.isConfirmed) {
+      //aqui agrego mi logica
+      //1- buscar la posicion del elemento que quiero borrar con findIndex
+      const posicionContactoBuscado = listaContactos.findIndex(
+        (contacto) => contacto.id === id
+      );
+      console.log(posicionContactoBuscado);
+      //2- borrar un contacto del array con splice
+      listaContactos.splice(posicionContactoBuscado, 1);
+      //3- actualizar el localstorage por que queda con menos posiciones
+      guardarEnLocalstorage();
+      //4- actualizar la tabla
+      // console.log(tabla.children[posicionContactoBuscado])
+      tabla.removeChild(tabla.children[posicionContactoBuscado])
       Swal.fire({
         title: "Contacto eliminado",
-        text: "El contacto x fue eliminado correctamente",
-        icon: "success"
+        text: "El contacto fue eliminado correctamente",
+        icon: "success",
       });
     }
   });
-  console.log('desde borrarContacto')
-}
+  console.log("desde borrarContacto");
+};
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
 formularioContacto.addEventListener("submit", crearContacto);
