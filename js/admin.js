@@ -62,6 +62,8 @@ const crearContacto = (e) => {
   limpiarFormulario();
   //guardar los datos en localStorage
   guardarEnLocalstorage();
+  //ahora debo dibujar la fila al final de la tabla
+  dibujarFila(nuevoContacto)
 };
 
 const limpiarFormulario = () => {
@@ -75,17 +77,17 @@ const cargaInicial = () => {
   //preguntar si hay datoy en el array
   if (listaContactos.length !== 0) {
     //dibujar una tabla en la fila
-    listaContactos.map((contacto) => dibujarFila());
+    listaContactos.map((contacto) => dibujarFila(contacto));
   }
 };
 
-const dibujarFila = () => {
+const dibujarFila = (contacto) => {
   const tabla = document.querySelector("tbody");
   tabla.innerHTML += `<tr>
-<td>1</td>
-<td>Lopez</td>
-<td>Camila</td>
-<td>camilaLopez@mail.com</td>
+<td>${contacto.id}</td>
+<td>${contacto.apellido}</td>
+<td>${contacto.nombre}</td>
+<td>${contacto.mail}</td>
 <td>
   <button class="btn btn-success">Ver</button>
   <button class="btn btn-warning">Editar</button>
