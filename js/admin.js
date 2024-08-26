@@ -91,10 +91,31 @@ const dibujarFila = (contacto) => {
 <td>
   <button class="btn btn-success">Ver</button>
   <button class="btn btn-warning">Editar</button>
-  <button class="btn btn-danger">Borrar</button>
+  <button class="btn btn-danger" onclick="borrarContacto()">Borrar</button>
 </td>
 </tr>`;
 };
+window.borrarContacto= ()=>{ //este metodo se usa para que funcione el onclick del boton borrar.
+  Swal.fire({
+    title: "¿Estás seguro que quieres borrar este contacto?.",
+    text: "No puedes revertir el proceso luego de borrar.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Borrar",
+    cancelButtonText: "Cancelar"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Contacto eliminado",
+        text: "El contacto x fue eliminado correctamente",
+        icon: "success"
+      });
+    }
+  });
+  console.log('desde borrarContacto')
+}
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
 formularioContacto.addEventListener("submit", crearContacto);
