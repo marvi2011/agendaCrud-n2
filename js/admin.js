@@ -88,7 +88,7 @@ const dibujarFila = (contacto) => {
 <td>${contacto.nombre}</td>
 <td>${contacto.mail}</td>
 <td>
-  <button class="btn btn-success">Ver</button>
+  <button class="btn btn-success" onclick="verDetalle('${contacto.id}')">Ver</button>
   <button class="btn btn-warning">Editar</button>
   <button class="btn btn-danger" onclick="borrarContacto('${contacto.id}')">Borrar</button>
 </td>
@@ -122,7 +122,8 @@ window.borrarContacto = (id) => {
       guardarEnLocalstorage();
       //4- actualizar la tabla
       // console.log(tabla.children[posicionContactoBuscado])
-      tabla.removeChild(tabla.children[posicionContactoBuscado])
+      tabla.removeChild(tabla.children[posicionContactoBuscado]);
+
       Swal.fire({
         title: "Contacto eliminado",
         text: "El contacto fue eliminado correctamente",
@@ -131,6 +132,11 @@ window.borrarContacto = (id) => {
     }
   });
   console.log("desde borrarContacto");
+};
+window.verDetalle = (id) => {
+  console.log(window);
+  console.log(window.location);
+  window.location.href = "/pages/detalleContacto.html?id="+id;
 };
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
