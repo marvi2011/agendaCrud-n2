@@ -1,6 +1,6 @@
 //aqui voy a agregar toda la logica del CRUD
 import { Contacto } from "./classContactos.js"; //los pasos son: 1) type = module en html que voy a usar, 2) Export en donde está el archivo que quiero usar y 3) import arriba de todo el codigo en el archivo en donde lo voy a usar
-import { validarCantidadCaracteres } from "./helpers.js";
+import { validarCantidadCaracteres, validarMail } from "./helpers.js";
 
 //1- declaro las variables
 /*console.log("desde admin.js");
@@ -47,7 +47,7 @@ const crearContacto = (e) => {
   console.log("desde la funcion crearContacto");
 
   //debo validad los datos del formulario´
-  if (validarCantidadCaracteres(apellido, 3, 50)) {
+  if (validarCantidadCaracteres(apellido, 3, 50) && validarCantidadCaracteres(nombre, 3, 50) && validarMail(mail)) {
     //crear el objeto
     const nuevoContacto = new Contacto(
       apellido.value,
