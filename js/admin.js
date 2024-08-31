@@ -1,5 +1,6 @@
 //aqui voy a agregar toda la logica del CRUD
 import { Contacto } from "./classContactos.js"; //los pasos son: 1) type = module en html que voy a usar, 2) Export en donde está el archivo que quiero usar y 3) import arriba de todo el codigo en el archivo en donde lo voy a usar
+import { validarCantidadCaracteres } from "./helpers.js";
 
 //1- declaro las variables
 /*console.log("desde admin.js");
@@ -44,26 +45,31 @@ const mostrarModal = () => {
 const crearContacto = (e) => {
   e.preventDefault();
   console.log("desde la funcion crearContacto");
-  //debo validad los datos del formulario
-  //crear el objeto
-  const nuevoContacto = new Contacto(
-    apellido.value,
-    nombre.value,
-    mail.value,
-    domicilio.value,
-    telefono.value,
-    git.value,
-    foto.value
-  );
-  console.log(nuevoContacto); //con esto veo el nuevo contacto
-  //quiero guardar el objeto en mi lista de contactos o array con push... ya hemos creado el array
-  listaContactos.push(nuevoContacto);
-  console.log(listaContactos);
-  limpiarFormulario();
-  //guardar los datos en localStorage
-  guardarEnLocalstorage();
-  //ahora debo dibujar la fila al final de la tabla
-  dibujarFila(nuevoContacto);
+
+  //debo validad los datos del formulario´
+  if (validarCantidadCaracteres(apellido, 3, 50)) {
+    //crear el objeto
+    const nuevoContacto = new Contacto(
+      apellido.value,
+      nombre.value,
+      mail.value,
+      domicilio.value,
+      telefono.value,
+      git.value,
+      foto.value
+    );
+    console.log(nuevoContacto); //con esto veo el nuevo contacto
+    //quiero guardar el objeto en mi lista de contactos o array con push... ya hemos creado el array
+    listaContactos.push(nuevoContacto);
+    console.log(listaContactos);
+    limpiarFormulario();
+    //guardar los datos en localStorage
+    guardarEnLocalstorage();
+    //ahora debo dibujar la fila al final de la tabla
+    dibujarFila(nuevoContacto);
+  } else {
+    console.log("Hay errores en la carga del formulario");
+  }
 };
 
 const limpiarFormulario = () => {
@@ -136,7 +142,7 @@ window.borrarContacto = (id) => {
 window.verDetalle = (id) => {
   console.log(window);
   console.log(window.location);
-  window.location.href = "/pages/detalleContacto.html?id="+id;
+  window.location.href = "/pages/detalleContacto.html?id=" + id;
 };
 //3- aqui voy a agregar toda la logica del CRUD
 btnNuevo.addEventListener("click", mostrarModal);
